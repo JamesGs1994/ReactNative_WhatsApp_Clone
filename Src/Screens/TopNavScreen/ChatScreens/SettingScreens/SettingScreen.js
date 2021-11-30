@@ -30,7 +30,7 @@ class SettingScreen extends Component {
                     width: '100%',
                   }}>
                   <Avatar.Image
-                    source={require('./Images/James.jpg')}
+                    source={require('../../../Images/James.jpg')}
                     size={70}
                   />
                   <TouchableRipple style={{marginLeft: 20, width: '67%'}}>

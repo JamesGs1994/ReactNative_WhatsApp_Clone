@@ -19,7 +19,7 @@ import {
   MenuTrigger,
 } from 'react-native-popup-menu';
 
-import ChatScreen from './ChatScreen';
+import ChatScreen from './ChatScreens/ChatScreen';
 import StatusScreen from './StatusScreen';
 import CallsScreen from './CallsScreen';
 import CameraScreen from './CameraScreen';

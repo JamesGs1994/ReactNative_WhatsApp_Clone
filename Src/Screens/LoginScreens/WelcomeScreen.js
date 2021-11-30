@@ -19,7 +19,7 @@ class WelcomeScreen extends Component {
         </View>
         <View style={StyleName.view2}>
           <Image
-            source={require('./Images/initImg.jpg')}
+            source={require('../Images/initImg.jpg')}
             style={{width: 280, height: 280}}
           />
         </View>

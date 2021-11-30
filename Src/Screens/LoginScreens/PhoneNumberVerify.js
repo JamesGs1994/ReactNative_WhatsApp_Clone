@@ -5,6 +5,7 @@ import {
   StyleSheet,
   TouchableHighlight,
   Linking,
+  TextInput,
 } from 'react-native';
 import {
   MenuProvider,
@@ -15,12 +16,25 @@ import {
 } from 'react-native-popup-menu';
 import PhoneInput from 'react-native-phone-number-input';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import Octicons from 'react-native-vector-icons/Octicons';
+import CoutriesINflatlist from './CoutriesINflatlist';
 
 class PhoneNumberVerify extends Component {
   state = {
     InputValue: '',
+    isLoading: true,
+    dataSource: [],
   };
-
+  FlatListItemSeparator = () => {
+    return (
+      <View
+        style={{
+          height: 0.5,
+          width: '100%',
+        }}
+      />
+    );
+  };
   Validater() {
     if (this.state.InputValue == '') {
       this.setState(alert('Please Enter Your Number'));
@@ -81,6 +95,13 @@ class PhoneNumberVerify extends Component {
               </Text>
             </Text>
           </View>
+
+          <View style={StyleName.viewCountry}>
+            <View style={StyleName.Country}>
+              <TextInput style={{inlineImageLeft: 'down'}} />
+            </View>
+          </View>
+
           <View style={StyleName.view3}>
             <PhoneInput
               onChangeText={text => this.setState({InputValue: text})}
@@ -95,7 +116,6 @@ class PhoneNumberVerify extends Component {
             />
             <Text style={StyleName.view3Text}>Charrier charges may apply</Text>
           </View>
-
           <View style={StyleName.view4}>
             <TouchableHighlight
               style={StyleName.view4Btn}
@@ -134,7 +154,7 @@ const StyleName = StyleSheet.create({
     fontSize: 15,
   },
   view4: {
-    flex: 0.5,
+    flex: 0.4,
     justifyContent: 'flex-end',
   },
   view4Btn: {
@@ -146,9 +166,10 @@ const StyleName = StyleSheet.create({
     borderRadius: 6,
   },
   phoneContainer: {
-    width: '75%',
     height: 50,
     marginBottom: 15,
+    borderBottomWidth: 2,
+    borderColor: '#008069',
   },
   button: {
     marginTop: 30,
@@ -170,6 +191,23 @@ const StyleName = StyleSheet.create({
   MenuOption: {
     paddingBottom: 15,
     marginLeft: 10,
+  },
+  RowView: {
+    flex: 1,
+    flexDirection: 'row',
+    marginBottom: 1,
+    borderBottomWidth: 0.2,
+    borderBottomColor: 'gray',
+  },
+  viewCountry: {
+    flex: 0.1,
+    alignItems: 'center',
+    width: '100%',
+  },
+  Country: {
+    width: '86%',
+    borderBottomWidth: 2,
+    borderColor: '#008069',
   },
 });
 

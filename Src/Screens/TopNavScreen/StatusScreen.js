@@ -87,7 +87,7 @@ export default class StatusScreen extends Component {
           }}>
           <View style={styles.MyStatus}>
             <Image
-              source={require('./Images/James.jpg')}
+              source={require('../Images/James.jpg')}
               style={{width: 80, height: 80, borderRadius: 100}}
             />
             <View style={styles.MyStatusTextView}>

@@ -3,19 +3,20 @@ import {NavigationContainer} from '@react-navigation/native';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-import WelcomeScreen from './Screens/WelcomeScreen';
-import PhoneNumberVerify from './Screens/PhoneNumberVerify';
-import ChatScreen from './Screens/ChatScreen';
-import TabTopNavigator from './Screens/TabTopNavigator';
-import MessagesList from './Screens/MessagesList';
-import LinkDeviceBarCode from './Screens/LinkDeviceBarCode';
-import CameraScreen from './Screens/CameraScreen';
-import SettingScreen from './Screens/SettingScreen';
-import STNinsideAccount from './Screens/STNinsideAccount';
-import STNinsideChat from './Screens/STNinsideChat';
-import STNinsideNotification from './Screens/STNinsideNotification';
-import STNinsideStorge from './Screens/STNinsideStorge';
-import STNinsideHelp from './Screens/STNinsideHelp';
+import WelcomeScreen from './Src/Screens/LoginScreens/WelcomeScreen';
+import PhoneNumberVerify from './Src/Screens/LoginScreens/PhoneNumberVerify';
+import CoutriesINflatlist from './Src/Screens/LoginScreens/CoutriesINflatlist';
+import ChatScreen from './Src/Screens/TopNavScreen/ChatScreens/ChatScreen';
+import TabTopNavigator from './Src/Screens/TopNavScreen/TabTopNavigator';
+import MessagesList from './Src/Screens/TopNavScreen/ChatScreens/MessagesList';
+import LinkDeviceBarCode from './Src/Screens/TopNavScreen/ChatScreens/LinkDevicePopupMenu/LinkDeviceBarCode';
+import CameraScreen from './Src/Screens/TopNavScreen/CameraScreen';
+import SettingScreen from './Src/Screens/TopNavScreen/ChatScreens/SettingScreens/SettingScreen';
+import STNinsideAccount from './Src/Screens/TopNavScreen/ChatScreens/SettingScreens/STNinsideAccount';
+import STNinsideChat from './Src/Screens/TopNavScreen/ChatScreens/SettingScreens/STNinsideChat';
+import STNinsideNotification from './Src/Screens/TopNavScreen/ChatScreens/SettingScreens/STNinsideNotification';
+import STNinsideStorge from './Src/Screens/TopNavScreen/ChatScreens/SettingScreens/STNinsideStorge';
+import STNinsideHelp from './Src/Screens/TopNavScreen/ChatScreens/SettingScreens/STNinsideHelp';
 
 const Stack = createNativeStackNavigator();
 
@@ -117,6 +118,16 @@ class App extends Component {
               options={{
                 headerShown: true,
                 headerTitle: 'Help',
+                headerStyle: {backgroundColor: '#008069'},
+                headerTintColor: '#fff',
+              }}
+            />
+            <Stack.Screen
+              name="CoutriesINflatlist"
+              component={CoutriesINflatlist}
+              options={{
+                headerShown: true,
+                headerTitle: 'Select a Country',
                 headerStyle: {backgroundColor: '#008069'},
                 headerTintColor: '#fff',
               }}

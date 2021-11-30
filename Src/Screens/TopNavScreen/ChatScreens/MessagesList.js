@@ -90,7 +90,7 @@ export default class Example extends Component {
         <ImageBackground
           style={styles.imgBackground}
           resizeMode="cover"
-          source={require('./Images/BG.png')}>
+          source={require('../../Images/BG.png')}>
           <View style={styles.container}>
             <View style={styles.topbar}>
               <View style={styles.MyStatus}>
@@ -106,7 +106,7 @@ export default class Example extends Component {
                 </View>
                 <View>
                   <Image
-                    source={require('./Images/James.jpg')}
+                    source={require('../../Images/James.jpg')}
                     style={{
                       width: 60,
                       height: 60,
@@ -230,7 +230,7 @@ export default class Example extends Component {
               </View>
               <TouchableOpacity style={styles.btnSend}>
                 <Image
-                  source={require('./Images/Sendarrow.png')}
+                  source={require('../../Images/Sendarrow.png')}
                   style={styles.iconSend}
                 />
               </TouchableOpacity>

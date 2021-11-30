@@ -16,6 +16,7 @@ export default class ChatScreen extends Component {
     super(props);
     this.state = {
       isLoading: true,
+      dataSource: '',
     };
   }
   GetItem(Girl_name) {
