@@ -5,7 +5,7 @@ import {
   StyleSheet,
   TouchableHighlight,
   Linking,
-  TextInput,
+  KeyboardAvoidingView,
 } from 'react-native';
 import {
   MenuProvider,
@@ -14,17 +14,32 @@ import {
   MenuOption,
   MenuTrigger,
 } from 'react-native-popup-menu';
-import PhoneInput from 'react-native-phone-number-input';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import Octicons from 'react-native-vector-icons/Octicons';
-import CoutriesINflatlist from './CoutriesINflatlist';
+import {TextInput} from 'react-native-paper';
 
 class PhoneNumberVerify extends Component {
-  state = {
-    InputValue: '',
-    isLoading: true,
-    dataSource: [],
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      PhoneInputValue: '',
+      isLoading: true,
+      CountryInputValue: this.props.route.params,
+      CountryCodeValue: this.props.route.params,
+    };
+  }
+  componentDidMount() {
+    this.props.navigation.addListener('focus', () => {
+      if (this.props.route.params !== undefined) {
+        let selObj = this.props.route.params.TransferData;
+        if (selObj !== undefined) {
+          this.setState({CountryInputValue: selObj.name});
+          this.setState({CountryCodeValue: selObj.dial_code});
+          console.log(selObj.dial_code);
+        }
+      }
+    });
+  }
+
   FlatListItemSeparator = () => {
     return (
       <View
@@ -36,15 +51,19 @@ class PhoneNumberVerify extends Component {
     );
   };
   Validater() {
-    if (this.state.InputValue == '') {
+    if (this.props.route.params == undefined) {
+      this.setState(alert('Please Enter Dial Code'));
+    } else if (this.state.PhoneInputValue == '') {
       this.setState(alert('Please Enter Your Number'));
+    } else if (this.state.PhoneInputValue.length < 10) {
+      this.setState(alert('Please Enter Valid Phone Number'));
     } else {
       this.props.navigation.navigate('TabTopNavigator');
     }
   }
   render() {
     return (
-      <MenuProvider style={{flex: 1}}>
+      <MenuProvider>
         <View style={StyleName.Container}>
           <View style={StyleName.view1}>
             <Text
@@ -97,24 +116,92 @@ class PhoneNumberVerify extends Component {
           </View>
 
           <View style={StyleName.viewCountry}>
-            <View style={StyleName.Country}>
-              <TextInput style={{inlineImageLeft: 'down'}} />
-            </View>
+            <TouchableHighlight
+              onPress={() =>
+                this.props.navigation.navigate('CoutriesINflatlist')
+              }>
+              <TextInput
+                dense={true}
+                value={this.state.CountryInputValue}
+                mode="flat"
+                editable={false}
+                placeholder="Select a Country"
+                selectionColor={'#008069'}
+                activeUnderlineColor={'#008069'}
+                outlineColor={'#008069'}
+                underlineColor={'#008069'}
+                activeOutlineColor={'#008069'}
+                theme={{colors: {primary: '#008069'}}}
+                style={{
+                  height: 38,
+                  width: '100%',
+                  alignSelf: 'center',
+                  backgroundColor: '#fff',
+                  textAlign: 'center',
+                }}
+                right={
+                  <TextInput.Icon
+                    name={() => (
+                      <Ionicons
+                        name={'caret-down-sharp'}
+                        size={20}
+                        color={'#008069'}
+                      />
+                    )}
+                  />
+                }
+                onChangeText={a => this.setState({CountryInputValue: a})}
+              />
+            </TouchableHighlight>
           </View>
-
-          <View style={StyleName.view3}>
-            <PhoneInput
-              onChangeText={text => this.setState({InputValue: text})}
-              defaultCode="IN"
-              layout="first"
-              keyboardType="numeric"
-              withShadow
-              autoFocus
-              containerStyle={StyleName.phoneContainer}
-              textContainerStyle={StyleName.textInput}
-              onPressFlag={this.onPressFlag}
+          <View style={StyleName.viewCountryCode}>
+            <TouchableHighlight
+              style={{
+                width: '20%',
+              }}
+              onPress={() =>
+                this.props.navigation.navigate('CoutriesINflatlist')
+              }>
+              <TextInput
+                dense={true}
+                value={this.state.CountryCodeValue}
+                placeholder={'+91'}
+                mode="flat"
+                editable={false}
+                selectionColor={'#008069'}
+                activeUnderlineColor={'#008069'}
+                outlineColor={'#008069'}
+                underlineColor={'#008069'}
+                activeOutlineColor={'#008069'}
+                theme={{colors: {primary: '#008069'}}}
+                style={{
+                  height: 38,
+                  backgroundColor: '#fff',
+                  textAlign: 'right',
+                }}
+                onChangeText={a => this.setState({CountryCodeValue: a})}
+              />
+            </TouchableHighlight>
+            <TextInput
+              value={this.state.PhoneInputValue}
+              maxLength={10}
+              placeholder={'Phone number'}
+              selectionColor={'#008069'}
+              activeUnderlineColor={'#008069'}
+              outlineColor={'#008069'}
+              underlineColor={'#008069'}
+              activeOutlineColor={'#008069'}
+              theme={{colors: {primary: '#008069'}}}
+              keyboardType="number-pad"
+              style={{
+                marginLeft: '5%',
+                height: 38,
+                width: '55%',
+                backgroundColor: '#fff',
+                textAlign: 'left',
+              }}
+              onChangeText={a => this.setState({PhoneInputValue: a})}
             />
-            <Text style={StyleName.view3Text}>Charrier charges may apply</Text>
           </View>
           <View style={StyleName.view4}>
             <TouchableHighlight
@@ -130,32 +217,34 @@ class PhoneNumberVerify extends Component {
     );
   }
 }
-
+export default PhoneNumberVerify;
 const StyleName = StyleSheet.create({
   Container: {
     flex: 1,
     alignItems: 'center',
     backgroundColor: '#ffffff',
-    padding: 15,
+    padding: 10,
+    borderRadius: 25,
   },
   view1: {
     flex: 0.1,
     flexDirection: 'row',
     alignItems: 'center',
+    width: '100%',
   },
   view2: {
     flex: 0.1,
-  },
-  view3: {
-    flex: 0.1,
+    width: '100%',
   },
   view3Text: {
     textAlign: 'center',
     fontSize: 15,
   },
   view4: {
-    flex: 0.4,
+    flex: 0.7,
+    width: '100%',
     justifyContent: 'flex-end',
+    alignItems: 'center',
   },
   view4Btn: {
     height: 45,
@@ -165,50 +254,23 @@ const StyleName = StyleSheet.create({
     backgroundColor: '#008069',
     borderRadius: 6,
   },
-  phoneContainer: {
-    height: 50,
-    marginBottom: 15,
-    borderBottomWidth: 2,
-    borderColor: '#008069',
-  },
-  button: {
-    marginTop: 30,
-    width: '75%',
-    padding: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'green',
-  },
   textInput: {
     paddingVertical: 0,
   },
-  Menu: {
-    padding: 5,
-  },
-  MenuOptions: {
-    padding: 5,
-  },
+
   MenuOption: {
-    paddingBottom: 15,
-    marginLeft: 10,
-  },
-  RowView: {
-    flex: 1,
-    flexDirection: 'row',
-    marginBottom: 1,
-    borderBottomWidth: 0.2,
-    borderBottomColor: 'gray',
+    padding: 15,
+    marginLeft: 15,
   },
   viewCountry: {
-    flex: 0.1,
-    alignItems: 'center',
-    width: '100%',
+    flex: 0.05,
+    width: '80%',
   },
-  Country: {
-    width: '86%',
-    borderBottomWidth: 2,
-    borderColor: '#008069',
+  viewCountryCode: {
+    flex: 0.05,
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
-
-export default PhoneNumberVerify;

@@ -62,8 +62,6 @@ export default class CoutriesINflatlist extends Component {
         style={{
           height: 0.5,
           width: '100%',
-          borderBottomColor: 'gray',
-          borderBottomWidth: 0.2,
         }}
       />
     );
@@ -141,7 +139,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     padding: 20,
-    maxWidth: '100%',
+    maxWidth: '95%',
   },
   RowView1: {
     width: '10%',

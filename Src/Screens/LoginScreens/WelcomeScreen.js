@@ -8,6 +8,8 @@ import {
   Linking,
 } from 'react-native';
 
+//useEffect(()=>{},[])
+
 class WelcomeScreen extends Component {
   render() {
     return (
