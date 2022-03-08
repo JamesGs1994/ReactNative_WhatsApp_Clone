@@ -2,26 +2,26 @@ const store = {
   players: [
     {
       id: 1,
-      name: 'Sachin',
+      name: 'James',
       likes: [
-        {type: 'food', value: ['idly', 'Dosa']},
-        {type: 'Drinks', value: ['lemon Juice', 'Apple Juice']},
+        { type: 'food', value: ['idly', 'Dosa'] },
+        { type: 'Drinks', value: ['lemon Juice', 'Apple Juice'] },
       ],
     },
     {
       id: 2,
       name: 'Dhoni',
       likes: [
-        {type: 'food', value: ['vada', 'uppuma']},
-        {type: 'Drinks', value: ['Orange Juice', 'mango Juice']},
+        { type: 'food', value: ['vada', 'uppuma'] },
+        { type: 'Drinks', value: ['Orange Juice', 'mango Juice'] },
       ],
     },
     {
       id: 3,
       name: 'Raina',
       likes: [
-        {type: 'food', value: ['idly', 'Dosa']},
-        {type: 'Drinks', value: ['lemon Juice', 'Apple Juice']},
+        { type: 'food', value: ['idly', 'Dosa'] },
+        { type: 'Drinks', value: ['lemon Juice', 'Apple Juice'] },
       ],
     },
   ],
